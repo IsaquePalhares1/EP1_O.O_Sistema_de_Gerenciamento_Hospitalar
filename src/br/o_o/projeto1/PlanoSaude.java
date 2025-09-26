@@ -20,8 +20,8 @@ public class PlanoSaude {
         this.descontoIdoso = 0.0;
     }
 
-    /* MÉTODOS GET */
 
+    /* MÉTODOS GET */
     public String getNome() {
         return nome;
     }
@@ -39,9 +39,7 @@ public class PlanoSaude {
     }
 
 
-
     /*  MÉTODOS SET  */
-
     public void setNome(String nome) {
         this.nome = nome;
     }

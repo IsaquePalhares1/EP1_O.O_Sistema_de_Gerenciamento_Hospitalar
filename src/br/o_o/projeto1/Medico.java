@@ -3,18 +3,20 @@ package br.o_o.projeto1;
 public class Medico{
 
     /*    ATRIBUTOS    */
-    String nome;
-    String crm;
-    int custoConsulta;
-    String especialidade;
+    private String nome;
+    private String crm;
+    private double custoConsulta;
+    private String especialidade;
+    private String[] agendaHorarios;
 
 
     /*  CONSTRUTOR */
-    public Medico(String nome, String crm, int custoConsulta, String especialidade){
+    public Medico(String nome, String crm, double custoConsulta, String especialidade, String[] agendaHorarios){
         this.nome= nome;
         this.crm = crm;
         this.custoConsulta = custoConsulta;
         this.especialidade = especialidade;
+        this.agendaHorarios = agendaHorarios;
     }
 
 
@@ -27,7 +29,7 @@ public class Medico{
         return crm;
     }
 
-    public int getCustoConsulta() {
+    public double getCustoConsulta() {
         return custoConsulta;
     }
 
@@ -35,6 +37,9 @@ public class Medico{
         return especialidade;
     }
 
+    public String[] getAgendaHorarios() {
+        return agendaHorarios;
+    }
 
     /*  MÉTODOS SET  */
 
@@ -46,7 +51,7 @@ public class Medico{
         this.crm = crm;
     }
 
-    public void setCustoConsulta(int custoConsulta) {
+    public void setCustoConsulta(double custoConsulta) {
         this.custoConsulta = custoConsulta;
     }
 

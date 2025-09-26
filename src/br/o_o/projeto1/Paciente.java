@@ -3,11 +3,11 @@ package br.o_o.projeto1;
 public class Paciente {
 
  /*    ATRIBUTOS    */
-    String nome;
-    String cpf;
-    int idade;
-    String[] histConsulta; //Histórico de consultas
-    String[] histInternacao; //Histórico de internações
+    private String nome;
+    private String cpf;
+    private int idade;
+    private String[] histConsulta; //Histórico de consultas
+    private String[] histInternacao; //Histórico de internações
 
 
     /*  CONSTRUTOR */
