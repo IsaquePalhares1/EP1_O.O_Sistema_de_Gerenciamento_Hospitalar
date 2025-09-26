@@ -1,5 +1,7 @@
 package br.o_o.projeto1;
 
+import java.util.Arrays;
+
 public class Paciente {
 
  /*    ATRIBUTOS    */
@@ -54,5 +56,16 @@ public class Paciente {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    /* TO STRING */
+    @Override
+    public String toString(){
+        return    "Nome: " + nome + "\n"
+                + "Cpf: " + cpf + "\n"
+                + "Idade: " + idade + "\n"
+                + "Histórico de Consultas: " + Arrays.toString(histConsulta) + "\n"
+                + "Histórico de internações: " + Arrays.toString(histInternacao);
+
     }
 }

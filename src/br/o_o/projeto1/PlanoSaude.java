@@ -7,7 +7,15 @@ public class PlanoSaude {
 
     /*  ATRIBUTOS */
     private String nome;
-    private Map<String, Double> descontoEspecialidade;
+    //private Map<String, Double> descontoEspecialidade;
+    private double descontoCardiologia;
+    private double descontoDermatologia;
+    private double descontoPediatria;
+    private double descontoOrtopedia;
+    private double descontoNeurologia;
+    private double descontoGinecologia;
+    private double descontoPsiquiatria;
+    private double descontoOftalmologia;
     private boolean internacaoGratuitaSemana;
     private double descontoIdoso;
 
@@ -15,7 +23,15 @@ public class PlanoSaude {
     /*  CONSTRUTOR */
     public PlanoSaude(String nome){
         this.nome = nome;
-        this.descontoEspecialidade = new HashMap<>();
+        //this.descontoEspecialidade = new HashMap<>();
+        this.descontoCardiologia = 0.0;
+        this.descontoDermatologia = 0.0;
+        this.descontoPediatria = 0.0;
+        this.descontoOrtopedia = 0.0;
+        this.descontoNeurologia = 0.0;
+        this.descontoGinecologia = 0.0;
+        this.descontoPsiquiatria = 0.0;
+        this.descontoOftalmologia = 0.0;
         this.internacaoGratuitaSemana= false;
         this.descontoIdoso = 0.0;
     }
@@ -26,16 +42,55 @@ public class PlanoSaude {
         return nome;
     }
 
-    public Map<String, Double> getDescontoEspecialidade() {
+   /* public Map<String, Double> getDescontoEspecialidade() {
         return descontoEspecialidade;
-    }
+    }*/
 
-    public boolean isInternacaoGratuitaSemana(){
-        return internacaoGratuitaSemana;
+    public String isInternacaoGratuitaSemana(){
+
+        if (internacaoGratuitaSemana == true){
+            return "Sim";
+        }
+        else {
+            return "Não";
+        }
+
     }
 
     public double getDescontoIdoso() {
         return descontoIdoso;
+    }
+
+    public double getDescontoCardiologia() {
+        return descontoCardiologia;
+    }
+
+    public double getDescontoDermatologia() {
+        return descontoDermatologia;
+    }
+
+    public double getDescontoPediatria() {
+        return descontoPediatria;
+    }
+
+    public double getDescontoOrtopedia() {
+        return descontoOrtopedia;
+    }
+
+    public double getDescontoNeurologia() {
+        return descontoNeurologia;
+    }
+
+    public double getDescontoGinecologia() {
+        return descontoGinecologia;
+    }
+
+    public double getDescontoPsiquiatria() {
+        return descontoPsiquiatria;
+    }
+
+    public double getDescontoOftalmologia() {
+        return descontoOftalmologia;
     }
 
 
@@ -45,9 +100,9 @@ public class PlanoSaude {
     }
 
 
-    public void setDescontoEspecialidade(Map<String, Double> descontoEspecialidade) {
+   /* public void setDescontoEspecialidade(Map<String, Double> descontoEspecialidade) {
         this.descontoEspecialidade = descontoEspecialidade;
-    }
+    }*/
 
 
     public void setInternacaoGratuitaSemana(boolean internacaoGratuitaSemana) {
@@ -58,6 +113,54 @@ public class PlanoSaude {
         this.descontoIdoso = descontoIdoso;
     }
 
+    public void setDescontoCardiologia(double descontoCardiologia) {
+        this.descontoCardiologia = descontoCardiologia;
+    }
+
+    public void setDescontoDermatologia(double descontoDermatologia) {
+        this.descontoDermatologia = descontoDermatologia;
+    }
+
+    public void setDescontoPediatria(double descontoPediatria) {
+        this.descontoPediatria = descontoPediatria;
+    }
+
+    public void setDescontoOrtopedia(double descontoOrtopedia) {
+        this.descontoOrtopedia = descontoOrtopedia;
+    }
+
+    public void setDescontoNeurologia(double descontoNeurologia) {
+        this.descontoNeurologia = descontoNeurologia;
+    }
+
+    public void setDescontoGinecologia(double descontoGinecologia) {
+        this.descontoGinecologia = descontoGinecologia;
+    }
+
+    public void setDescontoPsiquiatria(double descontoPsiquiatria) {
+        this.descontoPsiquiatria = descontoPsiquiatria;
+    }
+
+    public void setDescontoOftalmologia(double descontoOftalmologia) {
+        this.descontoOftalmologia = descontoOftalmologia;
+    }
+
+
+    /*  TO STRING */
+    @Override
+    public String toString(){
+        return    "Nome do Plano: " + nome + "\n"
+                + "Desconto Cardiologia: " + descontoCardiologia + "\n"
+                + "Desconto Dematologia: " + descontoDermatologia + "\n"
+                + "Desconto Pediatria: " + descontoPediatria + "\n"
+                + "Desconto Ortopedia: " + descontoOrtopedia + "\n"
+                + "Desconto Neurologia: " + descontoNeurologia + "\n"
+                + "Desconto Ginecologia: " + descontoGinecologia + "\n"
+                + "Desconto Psiquiatria: " + descontoPsiquiatria + "\n"
+                + "Desconto Oftalmologia: " + descontoOftalmologia + "\n"
+                + "Tem internação gratuita: " + isInternacaoGratuitaSemana() + "\n"
+                + "Desconto para idoso: " + descontoIdoso;
+    }
 
 }
 

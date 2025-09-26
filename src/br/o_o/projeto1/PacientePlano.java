@@ -24,4 +24,13 @@ public class PacientePlano extends Paciente {
     public void setPlanoSaude(PlanoSaude planoSaude) {
         this.planoSaude = planoSaude;
     }
+
+
+    /*  TO STRING */
+    @Override
+    public String toString(){
+        return    super.toString() + "\n"
+                + "Plano de Saúde: " + planoSaude;
+    }
+
 }
