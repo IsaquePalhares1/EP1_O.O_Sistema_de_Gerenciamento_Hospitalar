@@ -2,6 +2,7 @@ package br.o_o.projeto1;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class Consulta {
 
@@ -64,5 +65,17 @@ public class Consulta {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    /* TO STRING */
+    @Override
+    public String toString(){
+        return    "Paciente: " + paciente + "\n"
+                + "Médico: " + medico + "\n"
+                + "Data e Hora: " + dataHora + "\n"
+                + "Local: " + local + "\n"
+                + "Status: " + status;
+
     }
 }

@@ -6,7 +6,7 @@ public class Internacao{
 
     /*    ATRIBUTOS    */
     private Paciente paciente;
-    private Medico medico;
+    private Medico medicoResponsavel;
     private LocalDate dataEntrada;
     private LocalDate dataSaida;
     private int quarto;
@@ -14,9 +14,9 @@ public class Internacao{
 
 
     /*  CONSTRUTOR */
-    public Internacao(Paciente paciente, Medico medico, LocalDate dataEntrada, LocalDate dataSaida, int quarto, double custo){
+    public Internacao(Paciente paciente, Medico medicoResponsavel, LocalDate dataEntrada, LocalDate dataSaida, int quarto, double custo){
         this.paciente= paciente;
-        this.medico = medico;
+        this.medicoResponsavel = medicoResponsavel;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.quarto = quarto;
@@ -29,8 +29,8 @@ public class Internacao{
         return paciente;
     }
 
-    public Medico getMedico() {
-        return medico;
+    public Medico getMedicoResponsavel() {
+        return medicoResponsavel;
     }
 
     public LocalDate getDataEntrada() {
@@ -55,8 +55,8 @@ public class Internacao{
         this.paciente = paciente;
     }
 
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setMedico(Medico medicoResponsavel) {
+        this.medicoResponsavel = medicoResponsavel;
     }
 
     public void setDataEntrada(LocalDate dataEntrada) {
@@ -73,5 +73,18 @@ public class Internacao{
 
     public void setCusto(double custo) {
         this.custo = custo;
+    }
+
+
+    /* TO STRING */
+    @Override
+    public String toString(){
+        return    "Paciente: " + paciente + "\n"
+                + "Médico Responsável: " + medicoResponsavel + "\n"
+                + "Data de Entrada: " + dataEntrada + "\n"
+                + "Data de Saída: " + dataSaida + "\n"
+                + "Quarto: " + quarto + "\n"
+                + "Custo: " + custo;
+
     }
 }
