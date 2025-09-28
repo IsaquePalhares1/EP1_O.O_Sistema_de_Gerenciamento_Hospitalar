@@ -80,7 +80,7 @@ public class PacientePlano extends Paciente {
         }
 
         if (getIdade() >= 60) {
-            valor *= getPlanoSaude().getDescontoIdoso();
+            valor *= (1- getPlanoSaude().getDescontoIdoso());
         }
         else {
             valor = valor;
