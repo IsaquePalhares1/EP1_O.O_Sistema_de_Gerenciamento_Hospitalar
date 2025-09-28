@@ -10,6 +10,5 @@ public enum Especialidade{
         GINECOLOGIA,
         PSIQUIATRIA,
         OFTALMOLOGIA;
-
 }
 

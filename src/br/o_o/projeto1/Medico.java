@@ -1,6 +1,6 @@
 package br.o_o.projeto1;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Medico{
 
@@ -9,11 +9,11 @@ public class Medico{
     private String crm;
     private double custoConsulta;
     private Especialidade especialidade;
-    private String[] agendaHorarios;
+    private ArrayList<String> agendaHorarios;
 
 
     /*  CONSTRUTOR */
-    public Medico(String nome, String crm, double custoConsulta, Especialidade especialidade, String[] agendaHorarios){
+    public Medico(String nome, String crm, double custoConsulta, Especialidade especialidade, ArrayList<String> agendaHorarios){
         this.nome= nome;
         this.crm = crm;
         this.custoConsulta = custoConsulta;
@@ -39,7 +39,7 @@ public class Medico{
         return especialidade;
     }
 
-    public String[] getAgendaHorarios() {
+    public ArrayList<String> getAgendaHorarios() {
         return agendaHorarios;
     }
 
@@ -68,7 +68,7 @@ public class Medico{
                 + "Crm: " + crm + "\n"
                 + "Custo da Consulta: " + custoConsulta + "\n"
                 + "Especialidade: " + especialidade + "\n"
-                + "Agenda de horários: " + Arrays.toString(agendaHorarios);
+                + "Agenda de horários: " + String.join("|", agendaHorarios);
 
     }
 }

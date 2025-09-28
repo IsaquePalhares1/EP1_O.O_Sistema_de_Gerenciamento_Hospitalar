@@ -1,6 +1,6 @@
 package br.o_o.projeto1;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Paciente {
 
@@ -8,12 +8,12 @@ public class Paciente {
     private String nome;
     private String cpf;
     private int idade;
-    private String[] histConsulta; //Histórico de consultas
-    private String[] histInternacao; //Histórico de internações
+    private ArrayList<String> histConsulta; //Histórico de consultas
+    private ArrayList<String> histInternacao; //Histórico de internações
 
 
     /*  CONSTRUTOR */
-    public Paciente(String nome, String cpf, int idade, String[] histConsulta, String[] histInternacao){
+    public Paciente(String nome, String cpf, int idade, ArrayList<String> histConsulta, ArrayList<String> histInternacao){
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
@@ -35,11 +35,11 @@ public class Paciente {
         return idade;
     }
 
-    public String[] getHistConsultas(){
+    public ArrayList<String> getHistConsultas(){
         return histConsulta;
     }
 
-    public String[] getHistInternacoes(){
+    public ArrayList<String> getHistInternacoes(){
         return histInternacao;
     }
 
@@ -64,8 +64,15 @@ public class Paciente {
         return    "Nome: " + nome + "\n"
                 + "Cpf: " + cpf + "\n"
                 + "Idade: " + idade + "\n"
-                + "Histórico de Consultas: " + Arrays.toString(histConsulta) + "\n"
-                + "Histórico de internações: " + Arrays.toString(histInternacao);
+                + "Histórico de Consultas: " + String.join(" | ", histConsulta) + "\n"
+                + "Histórico de Internações: " + String.join(" | ", histInternacao);
+    }
+
+
+    /* MÉTODOS VALOR CONSULTA */
+    public double valorConsulta(Medico medico){
+        return medico.getCustoConsulta();
 
     }
-}
+
+    }

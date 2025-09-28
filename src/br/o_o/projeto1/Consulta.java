@@ -1,8 +1,8 @@
 package br.o_o.projeto1;
 
-import java.security.SecureRandom;
+//import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class Consulta {
 
