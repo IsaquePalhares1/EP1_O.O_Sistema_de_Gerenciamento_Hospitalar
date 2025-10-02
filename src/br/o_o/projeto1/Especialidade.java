@@ -2,6 +2,8 @@ package br.o_o.projeto1;
 
 public enum Especialidade {
 
+
+    PADRAO,
     CARDIOLOGIA,
     DERMATOLOGIA,
     PEDIATRIA,

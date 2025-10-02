@@ -1,6 +1,10 @@
 package br.o_o.projeto1;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PacientePlano extends Paciente {
 
@@ -9,11 +13,17 @@ public class PacientePlano extends Paciente {
     private PlanoSaude planoSaude;
 
 
-    /*  CONSTRUTOR */
+    /*  CONSTRUTORES */
     public PacientePlano(String nome, String cpf, int idade, ArrayList<String> histConsulta, ArrayList<String> histInternacao, PlanoSaude planoSaude) {
         super(nome, cpf, idade, histConsulta, histInternacao);
         this.planoSaude = planoSaude;
     }
+
+    public PacientePlano() {
+        super();
+        this.planoSaude = new PlanoSaude();
+    }
+
 
 
     /* MÉTODOS GET */
@@ -88,6 +98,42 @@ public class PacientePlano extends Paciente {
 
 
             return valor;
+    }
+
+    /* METODO CADASTRAR PACIENTE PLANO */
+    public void cadastrarPacientePlano(Scanner scanner) throws IOException {
+        PacientePlano pacientePlano = new PacientePlano();
+
+        System.out.print("Nome do paciente: ");
+        String nome = scanner.nextLine();
+        pacientePlano.setNome(nome);
+
+        System.out.print("Cpf do paciente: ");
+        String cpf = scanner.nextLine();
+        pacientePlano.setCpf(cpf);
+
+        System.out.print("Idade do paciente: ");
+        int idade = scanner.nextInt();
+        pacientePlano.setIdade(idade);
+        scanner.nextLine();
+
+        System.out.print("Plano de Saúde do paciente: ");
+        String plano = scanner.nextLine();
+        PlanoSaude planoSaude = new PlanoSaude(plano);
+        pacientePlano.setPlanoSaude(planoSaude);;
+
+
+        /*ADIÇAO NO ARQUIVO*/
+        try(PrintWriter escrever = new PrintWriter(new FileWriter("cadastro_pacientes.txt", true))) {
+            escrever.println(pacientePlano.getNome() + ";" +
+                    pacientePlano.getCpf() + ";" +
+                    pacientePlano.getIdade() + ";" +
+                    pacientePlano.getPlanoSaude().getNome() + ";" +
+                    String.join("|", pacientePlano.getHistConsultas()) + ";" +
+                    String.join("|", pacientePlano.getHistInternacoes()));
+
+        }
+
     }
 
 }

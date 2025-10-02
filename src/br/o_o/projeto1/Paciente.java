@@ -1,6 +1,11 @@
 package br.o_o.projeto1;
 
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.io.IOException;
 
 public class Paciente {
 
@@ -12,13 +17,21 @@ public class Paciente {
     private ArrayList<String> histInternacao; //Histórico de internações
 
 
-    /*  CONSTRUTOR */
+    /*  CONSTRUTORES */
     public Paciente(String nome, String cpf, int idade, ArrayList<String> histConsulta, ArrayList<String> histInternacao){
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
         this.histConsulta = histConsulta;
         this.histInternacao = histInternacao;
+    }
+
+    public Paciente(){
+        this.nome = " ";
+        this.cpf = " ";
+        this.idade = 0;
+        this.histConsulta = new ArrayList<>();
+        this.histInternacao = new ArrayList<>();
     }
 
 
@@ -75,4 +88,35 @@ public class Paciente {
 
     }
 
+    /* METODO CADASTRAR PACIENTE */
+    public void cadastrarPaciente(Scanner scanner) throws IOException{
+        Paciente paciente = new Paciente();
+
+        System.out.print("Nome do paciente: ");
+        String nome = scanner.nextLine();
+        paciente.setNome(nome);
+
+        System.out.print("Cpf do paciente: ");
+        String cpf = scanner.nextLine();
+        paciente.setCpf(cpf);
+
+        System.out.print("Idade do paciente: ");
+        int idade = scanner.nextInt();
+        paciente.setIdade(idade);
+        scanner.nextLine();
+
+
+        /*ADIÇAO NO ARQUIVO*/
+        try(PrintWriter escrever = new PrintWriter(new FileWriter("cadastro_pacientes.txt", true))) {
+            escrever.println(paciente.getNome() + ";" +
+                    paciente.getCpf() + ";" +
+                    paciente.getIdade() + ";" +
+                    String.join("|", paciente.getHistConsultas()) + ";" +
+                    String.join("|", paciente.getHistInternacoes()));
+
+        }
+
+
     }
+
+}

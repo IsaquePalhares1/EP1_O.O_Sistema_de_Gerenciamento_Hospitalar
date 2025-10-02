@@ -1,13 +1,10 @@
 package br.o_o.projeto1;
 
-//import java.util.HashMap;
-//import java.util.Map;
 
 public class PlanoSaude {
 
     /*  ATRIBUTOS */
     private String nome;
-    //private Map<String, Double> descontoEspecialidade;
     private double descontoCardiologia;
     private double descontoDermatologia;
     private double descontoPediatria;
@@ -20,10 +17,23 @@ public class PlanoSaude {
     private double descontoIdoso;
 
 
-    /*  CONSTRUTOR */
+    /*  CONSTRUTORES */
     public PlanoSaude(String nome){
         this.nome = nome;
-        //this.descontoEspecialidade = new HashMap<>();
+        this.descontoCardiologia = 0.0;
+        this.descontoDermatologia = 0.0;
+        this.descontoPediatria = 0.0;
+        this.descontoOrtopedia = 0.0;
+        this.descontoNeurologia = 0.0;
+        this.descontoGinecologia = 0.0;
+        this.descontoPsiquiatria = 0.0;
+        this.descontoOftalmologia = 0.0;
+        this.internacaoGratuitaSemana= false;
+        this.descontoIdoso = 0.0;
+    }
+
+    public PlanoSaude(){
+        this.nome = " ";
         this.descontoCardiologia = 0.0;
         this.descontoDermatologia = 0.0;
         this.descontoPediatria = 0.0;
@@ -41,10 +51,6 @@ public class PlanoSaude {
     public String getNome() {
         return nome;
     }
-
-   /* public Map<String, Double> getDescontoEspecialidade() {
-        return descontoEspecialidade;
-    }*/
 
     public String isInternacaoGratuitaSemana(){
 
@@ -98,12 +104,6 @@ public class PlanoSaude {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-
-   /* public void setDescontoEspecialidade(Map<String, Double> descontoEspecialidade) {
-        this.descontoEspecialidade = descontoEspecialidade;
-    }*/
-
 
     public void setInternacaoGratuitaSemana(boolean internacaoGratuitaSemana) {
         this.internacaoGratuitaSemana = internacaoGratuitaSemana;
@@ -161,6 +161,7 @@ public class PlanoSaude {
                 + "Tem internação gratuita: " + isInternacaoGratuitaSemana() + "\n"
                 + "Desconto para idoso: " + descontoIdoso;
     }
+
 
 }
 

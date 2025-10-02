@@ -1,78 +1,102 @@
 package br.o_o.projeto1;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
-        System.out.println("Bem-Vindo ao Sistema de Gerenciamento Hospitalar");
+    public static Scanner scanner = new Scanner(System.in);
 
-        try {
-            // Cria o cadastro e já carrega pacientes do arquivo
-            CadastroPaciente cadastro = new CadastroPaciente();
+    public static void main(String[] args) throws IOException {
 
-            // Mostra pacientes já cadastrados
-            System.out.println("Pacientes já cadastrados:");
-            for (Paciente p : cadastro.getPacientes()) {
-                System.out.println(p.getNome() + " - " + p.getCpf());
-            }
+        /* BOAS VINDAS */
+        System.out.println("Bem-Vindo ao Menu de Gerenciamento Hospitalar\n");
 
-            // Cria novos pacientes
-            ArrayList<String> consultas1 = new ArrayList<>(Arrays.asList("Consulta1", "Consulta2"));
-            ArrayList<String> internacoes1 = new ArrayList<>(Arrays.asList("Internacao1"));
-            Paciente paciente1 = new Paciente("João", "123456789", 30, consultas1, internacoes1);
 
-            ArrayList<String> consultas2 = new ArrayList<>(Arrays.asList("ConsultaA"));
-            ArrayList<String> internacoes2 = new ArrayList<>();
-            Paciente paciente2 = new Paciente("Maria", "987654321", 25, consultas2, internacoes2);
+        /* MENU INICIAL */
+        int opcao;
 
-            // Adiciona novos pacientes no cadastro e salva no arquivo
-            cadastro.addPaciente(paciente1);
-            cadastro.addPaciente(paciente2);
+        do {
+            System.out.println("1 - Cadastrar Paciente\n" +
+                               "2 - Cadastrar Paciente com Plano de Saúde\n" +
+                               "3 - Cadastrar Médico\n" +
+                               "4 - Agendar Consulta\n" +
+                               "5 - Internar Paciente\n" +
+                               "6 - Consultar Diagnósticos/Prescrições de Medicamentos\n" +
+                               "7 - Adicionar Plano de Saúde\n" +
+                               "8 - Olhar Relatórios\n" +
+                               "9 - Outros\n" +
+                               "10 - Sair\n");
+            System.out.print("Escolha uma das opções: ");
 
-            // Mostra todos os pacientes após adicionar
-            System.out.println("\nTodos os pacientes após adicionar novos:");
-            for (Paciente p : cadastro.getPacientes()) {
-                System.out.println(p.getNome() + " - " + p.getCpf());
-            }
+            opcao = scanner.nextInt();
+            scanner.nextLine();
 
-        } catch (IOException e) {
-            System.out.println("Erro ao acessar o arquivo: " + e.getMessage());
+        } while (opcao < 1 || opcao > 10);
+
+        switch (opcao){
+            case 1:
+                System.out.println();
+                Paciente paciente = new Paciente();
+                paciente.cadastrarPaciente(scanner);
+                return;
+
+            case 2:
+                System.out.println();
+                PacientePlano pacientePlano = new PacientePlano();
+                pacientePlano.cadastrarPacientePlano(scanner);
+                return;
+
+            case 3:
+                System.out.println();
+                Medico medico = new Medico();
+                medico.cadastrarMedico(scanner);
+                return;
+
+            case 4:
+                System.out.println();
+                //...
+                return;
+
+            case 5:
+                System.out.println();
+                //...
+                return;
+
+            case 6:
+                System.out.println();
+                //...
+                return;
+
+            case 7:
+                System.out.println();
+                //...
+                return;
+
+            case 8:
+                System.out.println();
+                //...
+                return;
+
+            case 9:
+                System.out.println();
+                //...
+                return;
+
+            case 10:
+                System.out.println();
+                //...
+                return;
+
         }
 
 
-        try {
-            // Cria o cadastro e carrega médicos do arquivo
-            CadastroMedico cadastro = new CadastroMedico();
 
-            // Mostra médicos já cadastrados
-            System.out.println("Médicos já cadastrados:");
-            for (Medico m : cadastro.getMedicos()) {
-                System.out.println(m.getNome() + " - " + m.getCrm() + " - " + m.getEspecialidade());
-            }
 
-            // Cria novos médicos
-            ArrayList<String> agenda1 = new ArrayList<>(Arrays.asList("09:00", "10:00", "11:00"));
-            Medico medico1 = new Medico("Dr. João", "12345", 200.0, Especialidade.CARDIOLOGIA, agenda1);
 
-            ArrayList<String> agenda2 = new ArrayList<>(Arrays.asList("14:00", "15:00"));
-            Medico medico2 = new Medico("Dra. Maria", "67890", 250.0, Especialidade.DERMATOLOGIA, agenda2);
 
-            // Adiciona novos médicos no cadastro e salva no arquivo
-            cadastro.addMedico(medico1);
-            cadastro.addMedico(medico2);
 
-            // Mostra todos os médicos após adicionar novos
-            System.out.println("\nTodos os médicos após adicionar novos:");
-            for (Medico m : cadastro.getMedicos()) {
-                System.out.println(m.getNome() + " - " + m.getCrm() + " - " + m.getEspecialidade());
-            }
-
-        } catch (IOException e) {
-            System.out.println("Erro ao acessar o arquivo: " + e.getMessage());
-        }
-
+        scanner.close();
     }
+
 }
