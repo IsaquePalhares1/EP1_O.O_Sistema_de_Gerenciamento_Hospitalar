@@ -55,12 +55,14 @@ public class Main {
 
             case 4:
                 System.out.println();
-                //...
+                Consulta consulta = new Consulta();
+                consulta.agendarConsulta(scanner);
                 return;
 
             case 5:
                 System.out.println();
-                //...
+                Internacao internacao = new Internacao();
+                internacao.marcarInternacao(scanner);
                 return;
 
             case 6:

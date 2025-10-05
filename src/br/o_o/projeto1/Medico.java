@@ -1,5 +1,6 @@
 package br.o_o.projeto1;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -115,7 +116,43 @@ public class Medico{
                     String.join("|", medico.getAgendaHorarios()));
 
 
+
         }
 
     }
+
+
+    /* METODO LISTA DE MEDICOS */
+    public ArrayList<Medico> listaMedicos() throws IOException {
+        ArrayList<Medico> medicos = new ArrayList<>();
+
+        File arquivo = new File("cadastro_medicos.txt");
+
+
+        try (Scanner leitor = new Scanner(arquivo)) {
+
+            while (leitor.hasNextLine()) {
+
+                String m = leitor.nextLine();
+                String[] partes = m.split(";");
+                String nome = partes[0];
+                String crm = partes[1];
+                double custoConsulta = Double.parseDouble(partes[2]);
+                Especialidade especialidade = Especialidade.parseEspecialidade(partes[3]);
+
+                ArrayList<String> agendaHorarios = new ArrayList<>();
+
+
+                if (partes.length > 4 && !partes[4].isEmpty())
+                    agendaHorarios = new ArrayList<>(java.util.Arrays.asList(partes[4].split("\\|")));
+
+
+                Medico medico = new Medico(nome, crm, custoConsulta, especialidade, agendaHorarios);
+                medicos.add(medico);
+            }
+
+            return medicos;
+        }
+    }
+
 }

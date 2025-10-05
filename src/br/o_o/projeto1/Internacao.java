@@ -1,6 +1,14 @@
 package br.o_o.projeto1;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Internacao{
 
@@ -21,6 +29,15 @@ public class Internacao{
         this.dataSaida = dataSaida;
         this.quarto = quarto;
         this.custo = custo;
+    }
+
+    public Internacao(){
+        this.paciente= new Paciente();
+        this.medicoResponsavel = new Medico();
+        this.dataEntrada = null;
+        this.dataSaida = null;
+        this.quarto = 0;
+        this.custo = 0.0;
     }
 
 
@@ -86,5 +103,120 @@ public class Internacao{
                 + "Quarto: " + quarto + "\n"
                 + "Custo: " + custo;
 
+    }
+
+
+
+    /* METODO MARCAR INTERNACAO */
+    public void marcarInternacao(Scanner scanner) throws IOException {
+
+        System.out.print("Nome do Paciente: ");
+        String nomeP = scanner.nextLine();
+
+        System.out.print("Cpf do Paciente: ");
+        String cpf = scanner.nextLine();
+
+        System.out.print("Nome do Médico: ");
+        String nomeM = scanner.nextLine();
+
+        System.out.print("Crm do Médico: ");
+        String crm = scanner.nextLine();
+
+        System.out.print("Data de Entrada (formato: AAAA-MM-DD): ");
+        String dataEntradaStr = scanner.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataEntrada = LocalDate.parse(dataEntradaStr, formatter);
+
+        String dataSaidaStr = null;
+
+        System.out.print("Quarto: ");
+        int quarto = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Custo: ");
+        double custo = scanner.nextDouble();
+        scanner.nextLine();
+
+
+
+        Paciente cadastroP = new Paciente();
+        cadastroP.setNome(nomeP);
+        cadastroP.setCpf(cpf);
+        ArrayList<Paciente> listaPaciente = cadastroP.listaPacientes();
+        for (Paciente p : listaPaciente) {
+            if (p.getNome().equals(cadastroP.getNome()) && p.getCpf().equals(cadastroP.getCpf())) {
+                cadastroP = p;
+                break;
+            }
+        }
+
+        Medico cadastroM = new Medico();
+        cadastroM.setNome(nomeM);
+        cadastroM.setCrm(crm);
+        ArrayList<Medico> listaMedico = cadastroM.listaMedicos();
+        for (Medico m : listaMedico) {
+            if (m.getNome().equals(cadastroM.getNome()) && m.getCrm().equals(cadastroM.getCrm())) {
+                cadastroM = m;
+                break;
+            }
+        }
+
+        Internacao internacao = new Internacao(cadastroP, cadastroM, dataEntrada, dataSaida, quarto, custo);
+
+        /* ADIÇÃO NO ARQUIVO */
+        try (PrintWriter escrever = new PrintWriter(new FileWriter("marcacoes_internacoes.txt", true))) {
+            escrever.println(cadastroP.getNome() + ";" +
+                    cadastroM.getNome() + ";" +
+                    internacao.getDataEntrada().format(formatter) + ";" +
+                    (internacao.getDataSaida() != null ? internacao.getDataSaida().format(formatter) : "") + ";" +
+                    internacao.getQuarto() + ";" +
+                    internacao.getCusto());
+        }
+    }
+
+
+
+
+    /* METODO HISTORICO DE INTERNACAO */
+    public ArrayList<Internacao> historicoDeInternacoes() throws IOException {
+        ArrayList<Internacao> internacoes = new ArrayList<>();
+
+        File arquivo = new File("marcacoes_internacoes.txt");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try (Scanner leitor = new Scanner(arquivo)) {
+            while (leitor.hasNextLine()) {
+                String c = leitor.nextLine();
+                String[] partes = c.split(";");
+                String nomeP = partes[0];
+                String nomeM = partes[1];
+                LocalDate dataEntrada = LocalDate.parse(partes[2], formatter);
+                LocalDate dataSaida = partes[3].isEmpty() ? null : LocalDate.parse(partes[3], formatter1);
+                int quarto = Integer.parseInt(partes[4]);
+                double custo = Double.parseDouble(partes[5]);
+
+                Paciente paciente = new Paciente();
+                for (Paciente p : paciente.listaPacientes()) {
+                    if (p.getNome().equals(nomeP)) {
+                        paciente = p;
+                        break;
+                    }
+                }
+
+                Medico medico = new Medico();
+                for (Medico m : medico.listaMedicos()) {
+                    if (m.getNome().equals(nomeM)) {
+                        medico = m;
+                        break;
+                    }
+                }
+
+                Internacao internacao = new Internacao(paciente, medico, dataEntrada, dataSaida, quarto, custo);
+                internacoes.add(internacao);
+            }
+        }
+
+        return internacoes;
     }
 }

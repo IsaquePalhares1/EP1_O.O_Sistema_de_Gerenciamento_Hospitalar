@@ -1,5 +1,6 @@
 package br.o_o.projeto1;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -30,8 +31,8 @@ public class Paciente {
         this.nome = " ";
         this.cpf = " ";
         this.idade = 0;
-        this.histConsulta = new ArrayList<>();
-        this.histInternacao = new ArrayList<>();
+        this.histConsulta = new ArrayList<>(0);
+        this.histInternacao = new ArrayList<>(0);
     }
 
 
@@ -117,6 +118,56 @@ public class Paciente {
         }
 
 
+
+
+
+
     }
 
+    /* METODO LISTA DE PACIENTES */
+    public ArrayList<Paciente> listaPacientes() throws IOException {
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+
+        File arquivo = new File("cadastro_pacientes.txt");
+
+
+        try (Scanner leitor = new Scanner(arquivo)) {
+
+            while (leitor.hasNextLine()) {
+
+                String linha = leitor.nextLine();
+
+                if (linha.trim().isEmpty()) {
+                    continue;
+                }
+
+                String p = leitor.nextLine();
+                String[] partes = p.split(";");
+
+
+                if (partes.length < 5) {
+                    continue;
+                }
+
+
+                String nome = partes[0];
+                String cpf = partes[1];
+                int idade = Integer.parseInt(partes[2]);
+
+                ArrayList<String> histConsultas = new ArrayList<>();
+                ArrayList<String> histInternacoes = new ArrayList<>();
+
+                if (partes.length > 3 && !partes[3].isEmpty())
+                    histConsultas = new ArrayList<>(java.util.Arrays.asList(partes[3].split("\\|")));
+
+                if (partes.length > 4 && !partes[4].isEmpty())
+                    histInternacoes = new ArrayList<>(java.util.Arrays.asList(partes[4].split("\\|")));
+
+                Paciente paciente = new Paciente(nome, cpf, idade, histConsultas, histInternacoes);
+                pacientes.add(paciente);
+            }
+
+            return pacientes;
+        }
+    }
 }
