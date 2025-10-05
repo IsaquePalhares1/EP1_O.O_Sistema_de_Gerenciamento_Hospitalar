@@ -127,28 +127,17 @@ public class Paciente {
     /* METODO LISTA DE PACIENTES */
     public ArrayList<Paciente> listaPacientes() throws IOException {
         ArrayList<Paciente> pacientes = new ArrayList<>();
-
         File arquivo = new File("cadastro_pacientes.txt");
 
-
         try (Scanner leitor = new Scanner(arquivo)) {
-
             while (leitor.hasNextLine()) {
-
                 String linha = leitor.nextLine();
 
-                if (linha.trim().isEmpty()) {
-                    continue;
-                }
+                if (linha.trim().isEmpty()) continue;
 
-                String p = leitor.nextLine();
-                String[] partes = p.split(";");
+                String[] partes = linha.split(";");
 
-
-                if (partes.length < 5) {
-                    continue;
-                }
-
+                if (partes.length < 3) continue;
 
                 String nome = partes[0];
                 String cpf = partes[1];
@@ -166,8 +155,7 @@ public class Paciente {
                 Paciente paciente = new Paciente(nome, cpf, idade, histConsultas, histInternacoes);
                 pacientes.add(paciente);
             }
-
-            return pacientes;
         }
+        return pacientes;
     }
 }

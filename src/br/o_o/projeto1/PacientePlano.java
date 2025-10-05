@@ -57,40 +57,40 @@ public class PacientePlano extends Paciente {
 
 
             case CARDIOLOGIA:
-                valor = custoBase * (1 - planoSaude.getDescontoCardiologia());
+                valor = custoBase * (100 - planoSaude.getDescontoCardiologia());
                 break;
 
             case DERMATOLOGIA:
-                valor = custoBase * (1 - planoSaude.getDescontoDermatologia());
+                valor = custoBase * (100 - planoSaude.getDescontoDermatologia());
                 break;
 
             case PEDIATRIA:
-                valor = custoBase * (1 -planoSaude.getDescontoPediatria());
+                valor = custoBase * (100 -planoSaude.getDescontoPediatria());
                 break;
 
             case ORTOPEDIA:
-                valor = custoBase * (1 - planoSaude.getDescontoOrtopedia());
+                valor = custoBase * (100 - planoSaude.getDescontoOrtopedia());
                 break;
 
             case NEUROLOGIA:
-                valor = custoBase * (1 - planoSaude.getDescontoNeurologia());
+                valor = custoBase * (100 - planoSaude.getDescontoNeurologia());
                 break;
 
             case GINECOLOGIA:
-                valor = custoBase * (1 - planoSaude.getDescontoGinecologia());
+                valor = custoBase * (100 - planoSaude.getDescontoGinecologia());
                 break;
 
             case PSIQUIATRIA:
-                valor = custoBase * (1 - planoSaude.getDescontoPsiquiatria());
+                valor = custoBase * (100 - planoSaude.getDescontoPsiquiatria());
                 break;
 
             case OFTALMOLOGIA:
-                valor = custoBase * (1 - planoSaude.getDescontoOftalmologia());
+                valor = custoBase * (100 - planoSaude.getDescontoOftalmologia());
                 break;
         }
 
         if (getIdade() >= 60) {
-            valor *= (1- getPlanoSaude().getDescontoIdoso());
+            valor *= (100- getPlanoSaude().getDescontoIdoso());
         }
         else {
             valor = valor;

@@ -22,17 +22,16 @@ public class Main {
                                "3 - Cadastrar Médico\n" +
                                "4 - Agendar Consulta\n" +
                                "5 - Internar Paciente\n" +
-                               "6 - Consultar Diagnósticos/Prescrições de Medicamentos\n" +
-                               "7 - Adicionar Plano de Saúde\n" +
-                               "8 - Olhar Relatórios\n" +
-                               "9 - Outros\n" +
-                               "10 - Sair\n");
+                               "6 - Adicionar Plano de Saúde\n" +
+                               "7 - Olhar Relatórios\n" +
+                               "8 - Outros\n" +
+                               "9 - Sair\n");
             System.out.print("Escolha uma das opções: ");
 
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-        } while (opcao < 1 || opcao > 10);
+        } while (opcao < 1 || opcao > 9);
 
         switch (opcao){
             case 1:
@@ -67,7 +66,8 @@ public class Main {
 
             case 6:
                 System.out.println();
-                //...
+                PlanoSaude planoSaude = new PlanoSaude();
+                planoSaude.cadastrarPlano(scanner);
                 return;
 
             case 7:
@@ -85,10 +85,7 @@ public class Main {
                 //...
                 return;
 
-            case 10:
-                System.out.println();
-                //...
-                return;
+
 
         }
 
