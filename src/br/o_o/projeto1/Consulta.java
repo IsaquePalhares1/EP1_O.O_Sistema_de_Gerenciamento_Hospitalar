@@ -122,7 +122,19 @@ public class Consulta {
         }
 
         System.out.println("Consulta agendada com sucesso!");
+
+        /* ADICAO EM MEDICO E PACIENTE */
+        String descricaoP = "Consulta do paciente com o Dr/Dra. " + medicoEncontrado.getNome() +
+                " em " + dataHora + " - AGENDADA";
+        pacienteEncontrado.addConsulta(descricaoP);
+        pacienteEncontrado.atualizarPacienteArquivo(pacienteEncontrado);
+
+        String descricaoM = "Consulta: Paciente " + pacienteEncontrado.getNome() + " - em " +
+                dataHora;
+        medicoEncontrado.addConsultaMedico(descricaoM);
+        medicoEncontrado.atualizarMedicoArquivo(medicoEncontrado);
     }
+
 
     /* METODO AGENDA DE CONSULTAS */
     public ArrayList<Consulta> agendaDeConsultas() throws IOException {
@@ -168,5 +180,78 @@ public class Consulta {
             }
         }
         return consultas;
+    }
+
+    /* METODO ATUALIXAR ARQUIVO CONSULTAS */
+    public void atualizarArquivoConsultas(ArrayList<Consulta> consultas) throws IOException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+        try (PrintWriter escrever = new PrintWriter(new FileWriter("agenda_consultas.txt"))) {
+            for (Consulta c : consultas) {
+                escrever.println(c.getPaciente().getNome() + ";" +
+                        c.getMedico().getNome() + ";" +
+                        c.getDataHora().format(formatter) + ";" +
+                        c.getLocal() + ";" +
+                        c.getStatus());
+            }
+        }
+    }
+
+
+    /* METODO CONCLUIR CONSULTA */
+    public void concluirConsulta(Scanner scanner, ArrayList<Consulta> consultas) throws IOException {
+        if (consultas.isEmpty()) {
+            System.out.println("Não há consultas cadastradas!");
+            return;
+        }
+
+        //Escolher consulta
+        System.out.print("Nome do Paciente: ");
+        String nomeP = scanner.nextLine();
+
+        System.out.print("Nome do Médico: ");
+        String nomeM = scanner.nextLine();
+
+        System.out.print("Data e hora da consulta (AAAA-MM-DDTHH:MM): ");
+        String dataStr = scanner.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime dataHora = LocalDateTime.parse(dataStr, formatter);
+
+        Consulta consultaSelecionada = null;
+        for (Consulta c : consultas) {
+            if (c.getPaciente().getNome().equalsIgnoreCase(nomeP) &&
+                    c.getMedico().getNome().equalsIgnoreCase(nomeM) &&
+                    c.getDataHora().equals(dataHora)) {
+                consultaSelecionada = c;
+                break;
+            }
+        }
+
+        if (consultaSelecionada == null) {
+            System.out.println("Consulta não encontrada!");
+            return;
+        }
+
+        //Inserir diagnóstico e prescrição
+        System.out.print("Digite o diagnóstico: ");
+        String diagnostico = scanner.nextLine();
+
+        System.out.print("Digite a prescrição: ");
+        String prescricao = scanner.nextLine();
+
+        String descricaoPaciente = "Consulta concluída: " + diagnostico + " | Prescrição: " + prescricao;
+        consultaSelecionada.getPaciente().addConsulta(descricaoPaciente);
+        consultaSelecionada.getPaciente().atualizarPacienteArquivo(consultaSelecionada.getPaciente());
+
+        String descricaoMedico = "Consulta concluída: Paciente " + consultaSelecionada.getPaciente().getNome() +
+                " - " + diagnostico + " | Prescrição: " + prescricao;
+        consultaSelecionada.getMedico().addConsultaMedico(descricaoMedico);
+        consultaSelecionada.getMedico().atualizarMedicoArquivo(consultaSelecionada.getMedico());
+
+        //Atualizar status e arquivo
+        consultaSelecionada.setStatus("CONCLUIDA");
+        new Consulta().atualizarArquivoConsultas(consultas);
+
+        System.out.println("Consulta concluída com sucesso!");
     }
 }

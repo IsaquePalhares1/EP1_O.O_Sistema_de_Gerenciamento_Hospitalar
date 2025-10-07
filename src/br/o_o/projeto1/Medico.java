@@ -74,6 +74,20 @@ public class Medico{
         this.especialidade = especialidade;
     }
 
+    /* METODO ADICIORNAR DESCRICAO DE CONSULTA A AGENDA HORARIOS */
+    public void addConsultaMedico(String descricao){
+        if (descricao != null && !descricao.trim().isEmpty()){
+            agendaHorarios.add(descricao);
+        }
+    }
+
+    /* METODO ADICIORNAR DESCRICAO DE INTERNACAO A AGENDA HORARIOS */
+    public void addInternacaoMedico(String descricao){
+        if (descricao != null && !descricao.trim().isEmpty()){
+            agendaHorarios.add(descricao);
+        }
+    }
+
     /* TO STRING */
     @Override
     public String toString(){
@@ -152,6 +166,35 @@ public class Medico{
             }
 
             return medicos;
+        }
+    }
+
+
+    /* METODO ATUALIZAR MEDICO NO ARQUIVO */
+    public void atualizarMedicoArquivo(Medico medico) throws IOException {
+        ArrayList<Medico> medicos = medico.listaMedicos();
+        ArrayList<String> linhas = new ArrayList<>();
+
+        for (Medico m : medicos) {
+            if (m.getCrm().equals(medico.getCrm())) {
+                linhas.add(medico.getNome() + ";" +
+                        medico.getCrm() + ";" +
+                        medico.getCustoConsulta() + ";" +
+                        medico.getEspecialidade() + ";" +
+                        String.join("|", medico.getAgendaHorarios()));
+            } else {
+                linhas.add(m.getNome() + ";" +
+                        m.getCrm() + ";" +
+                        m.getCustoConsulta() + ";" +
+                        m.getEspecialidade() + ";" +
+                        String.join("|", m.getAgendaHorarios()));
+            }
+        }
+
+        try (PrintWriter escrever = new PrintWriter(new FileWriter("cadastro_medicos.txt"))) {
+            for (String linha : linhas) {
+                escrever.println(linha);
+            }
         }
     }
 

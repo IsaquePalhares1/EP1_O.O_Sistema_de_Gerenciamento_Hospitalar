@@ -1,2 +1,1 @@
-4;4;4.0;CARDIOLOGIA;
-Maria Oliveira;98765;200.0;CARDIOLOGIA;
+4;4;4.0;CARDIOLOGIA;Consulta: Paciente 4 - em 2025-12-12T22:20|Internação: Paciente 4 - 2 - em 2025-12-12|Consulta concluída: Paciente 4 - Arritmia | Prescrição: Calmante|Paciente: 4 -- Internação iniciada em: 2025-12-12 -- Internação encerrada em: 2025-10-07

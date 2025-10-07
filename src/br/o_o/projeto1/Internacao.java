@@ -163,6 +163,17 @@ public class Internacao{
 
         Internacao internacao = new Internacao(cadastroP, cadastroM, dataEntrada, dataSaida, quarto, custo);
 
+        /* ADICAO EM MEDICO E PACIENTE */
+        String descricaoP = "Internação na data " + dataEntrada + " com o médico responsável " +
+                cadastroM.getNome() + " - " + quarto;
+        cadastroP.addInternacao(descricaoP);
+        cadastroP.atualizarPacienteArquivo(cadastroP);
+
+        String descricaoM = "Internação: Paciente " + cadastroP.getNome() + " - " + quarto + " - em " +
+                dataEntrada;
+        cadastroM.addInternacaoMedico(descricaoM);
+        cadastroM.atualizarMedicoArquivo(cadastroM);
+
         /* ADIÇÃO NO ARQUIVO */
         try (PrintWriter escrever = new PrintWriter(new FileWriter("marcacoes_internacoes.txt", true))) {
             escrever.println(cadastroP.getNome() + ";" +
@@ -218,5 +229,74 @@ public class Internacao{
         }
 
         return internacoes;
+    }
+
+
+    /* METODO ATUALIZAR ARQUIVO INTERNACOES */
+    public static void atualizarArquivoInternacoes(ArrayList<Internacao> internacoes) throws IOException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try (PrintWriter escrever = new PrintWriter(new FileWriter("marcacoes_internacoes.txt"))) {
+            for (Internacao i : internacoes) {
+                escrever.println(i.getPaciente().getNome() + ";" +
+                        i.getMedicoResponsavel().getNome() + ";" +
+                        i.getDataEntrada().format(formatter) + ";" +
+                        (i.getDataSaida() != null ? i.getDataSaida().format(formatter) : "") + ";" +
+                        i.getQuarto() + ";" +
+                        i.getCusto());
+            }
+        }
+    }
+
+
+    /* METODO CANCELAR INTERNACAO */
+    public void cancelarInternacao(Scanner scanner, ArrayList<Internacao> internacoes) throws IOException {
+        if (internacoes.isEmpty()) {
+            System.out.println("Não há internações cadastradas!");
+            return;
+        }
+
+        //Selecionar internação
+        System.out.print("Nome do Paciente: ");
+        String nomeP = scanner.nextLine();
+
+        System.out.print("Nome do Médico Responsável: ");
+        String nomeM = scanner.nextLine();
+
+        System.out.print("Data de Entrada da internação (AAAA-MM-DD): ");
+        String dataStr = scanner.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataEntrada = LocalDate.parse(dataStr, formatter);
+
+        Internacao internacaoSelecionada = null;
+        for (Internacao i : internacoes) {
+            if (i.getPaciente().getNome().equalsIgnoreCase(nomeP) &&
+                    i.getMedicoResponsavel().getNome().equalsIgnoreCase(nomeM) &&
+                    i.getDataEntrada().equals(dataEntrada)) {
+                internacaoSelecionada = i;
+                break;
+            }
+        }
+
+        if (internacaoSelecionada == null) {
+            System.out.println("Internação não encontrada!");
+            return;
+        }
+
+        //Atualizar data de saída e histórico
+        internacaoSelecionada.setDataSaida(LocalDate.now());
+
+        String descricaoP = "Internação iniciada em " + internacaoSelecionada.getDataEntrada() + " e encerrada em " + internacaoSelecionada.getDataSaida();
+        internacaoSelecionada.getPaciente().addInternacao(descricaoP);
+        internacaoSelecionada.getPaciente().atualizarPacienteArquivo(internacaoSelecionada.getPaciente());
+
+        String descricaoM = "Paciente: " + internacaoSelecionada.getPaciente().getNome() + " -- Internação iniciada em: " + internacaoSelecionada.getDataEntrada() + " -- Internação encerrada em: " + internacaoSelecionada.getDataSaida();
+        internacaoSelecionada.getMedicoResponsavel().addInternacaoMedico(descricaoM);
+        internacaoSelecionada.getMedicoResponsavel().atualizarMedicoArquivo(internacaoSelecionada.getMedicoResponsavel());
+
+        //Atualizar arquivo de internações
+        Internacao.atualizarArquivoInternacoes(internacoes);
+
+        System.out.println("Internação cancelada/encerrada com sucesso!");
     }
 }

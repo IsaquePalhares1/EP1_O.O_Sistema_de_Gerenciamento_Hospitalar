@@ -72,6 +72,21 @@ public class Paciente {
         this.idade = idade;
     }
 
+    /* METODO ADICIORNAR DESCRICAO A HIST CONSULTAS */
+    public void addConsulta(String descricao){
+        if (descricao != null && !descricao.trim().isEmpty()){
+            histConsulta.add(descricao);
+        }
+    }
+
+    /* METODO ADICIORNAR INTERNACAO A HIST INTERNACAO */
+    public void addInternacao(String descricao){
+        if (descricao != null && !descricao.trim().isEmpty()){
+            histInternacao.add(descricao);
+        }
+    }
+
+
     /* TO STRING */
     @Override
     public String toString(){
@@ -118,10 +133,6 @@ public class Paciente {
         }
 
 
-
-
-
-
     }
 
     /* METODO LISTA DE PACIENTES */
@@ -157,5 +168,35 @@ public class Paciente {
             }
         }
         return pacientes;
+    }
+
+
+    /* METODO ATUALIZAR PACIENTE NO ARQUIVO */
+    public void atualizarPacienteArquivo(Paciente paciente) throws IOException {
+        ArrayList<Paciente> pacientes = paciente.listaPacientes();
+        ArrayList<String> linhas = new ArrayList<>();
+
+        for (Paciente p : pacientes) {
+            if (p.getCpf().equals(paciente.getCpf())) {
+
+                linhas.add(paciente.getNome() + ";" +
+                        paciente.getCpf() + ";" +
+                        paciente.getIdade() + ";" +
+                        String.join("|", paciente.getHistConsultas()) + ";" +
+                        String.join("|", paciente.getHistInternacoes()));
+            } else {
+                linhas.add(p.getNome() + ";" +
+                        p.getCpf() + ";" +
+                        p.getIdade() + ";" +
+                        String.join("|", p.getHistConsultas()) + ";" +
+                        String.join("|", p.getHistInternacoes()));
+            }
+        }
+
+        try (PrintWriter escrever = new PrintWriter(new FileWriter("cadastro_pacientes.txt"))) {
+            for (String linha : linhas) {
+                escrever.println(linha);
+            }
+        }
     }
 }
