@@ -11,8 +11,10 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         /* BOAS VINDAS */
-        System.out.println("Bem-Vindo ao Menu de Gerenciamento Hospitalar\n");
-        Thread.sleep(2000);
+        System.out.println("**************************************************");
+        System.out.println("Bem-Vindo ao Menu de Gerenciamento Hospitalar");
+        System.out.println("**************************************************\n");
+        Thread.sleep(1000);
 
 
         /* MENU INICIAL */
@@ -28,9 +30,9 @@ public class Main {
                         "4 - Agendar Consulta\n" +
                         "5 - Internar Paciente\n" +
                         "6 - Adicionar Plano de Saúde\n" +
-                        "7 - Olhar Relatórios\n" +
-                        "8 - Concluir Consulta\n" +
-                        "9 - Cancelar Internação\n" +
+                        "7 - Concluir Consulta\n" +
+                        "8 - Encerrar Internação\n" +
+                        "9 - Olhar Relatórios\n" +
                         "10 - Sair\n");
                 System.out.println("****************************");
                 System.out.print("Escolha uma das opções: ");
@@ -119,17 +121,6 @@ public class Main {
                 case 7:
                     Thread.sleep(1000);
                     System.out.println("=============================");
-                    System.out.println("Olhar Relatórios");
-                    System.out.println("=============================");
-                    Thread.sleep(2000);
-                    System.out.println();
-                    //...
-                    break;
-
-
-                case 8:
-                    Thread.sleep(1000);
-                    System.out.println("=============================");
                     System.out.println("Concluir Consulta");
                     System.out.println("=============================");
                     Thread.sleep(2000);
@@ -140,7 +131,7 @@ public class Main {
                     break;
 
 
-                case 9:
+                case 8:
                     Thread.sleep(1000);
                     System.out.println("=============================");
                     System.out.println("Encerrar Internação");
@@ -151,6 +142,23 @@ public class Main {
                     ArrayList<Internacao> internacoes = internacao1.historicoDeInternacoes();
                     internacao1.cancelarInternacao(scanner, internacoes);
                     break;
+
+
+                case 9:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Olhar Relatórios");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
+                    System.out.println();
+                    Relatorios relatorios = new Relatorios();
+                    relatorios.relatorioPacientes();
+                    relatorios.relatorioMedicos();
+                    relatorios.relatorioConsultas();
+                    relatorios.relatorioPacientesInternados();
+                    relatorios.relatorioEstatisticas();
+                    break;
+
 
                 case 10:
                     Thread.sleep(1000);
