@@ -188,7 +188,7 @@ public class PlanoSaude {
 
 
     /* ADICIONAR PLANO SAUDE */
-    public void cadastrarPlano(Scanner scanner) throws IOException {
+    public void cadastrarPlano(Scanner scanner) throws IOException, InterruptedException {
         PlanoSaude planoSaude = new PlanoSaude();
 
         System.out.print("Nome do plano de saúde: ");
@@ -253,10 +253,11 @@ public class PlanoSaude {
 
         }
 
-
-
-
-
+        System.out.println();
+        Thread.sleep(1000);
+        System.out.println("Plano cadastrado com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
 
     }
 

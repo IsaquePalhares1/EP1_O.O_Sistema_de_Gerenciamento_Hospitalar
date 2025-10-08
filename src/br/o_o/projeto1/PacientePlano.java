@@ -57,51 +57,52 @@ public class PacientePlano extends Paciente {
 
 
             case CARDIOLOGIA:
-                valor = custoBase * (100 - planoSaude.getDescontoCardiologia());
+                valor = custoBase * (1 -(planoSaude.getDescontoCardiologia()*0.01));
                 break;
 
             case DERMATOLOGIA:
-                valor = custoBase * (100 - planoSaude.getDescontoDermatologia());
+                valor = custoBase * (1 -(planoSaude.getDescontoDermatologia()*0.01));
                 break;
 
             case PEDIATRIA:
-                valor = custoBase * (100 -planoSaude.getDescontoPediatria());
+                valor = custoBase * (1 -(planoSaude.getDescontoPediatria()*0.01));
                 break;
 
             case ORTOPEDIA:
-                valor = custoBase * (100 - planoSaude.getDescontoOrtopedia());
+                valor = custoBase * (1 -(planoSaude.getDescontoOrtopedia()*0.01));
                 break;
 
             case NEUROLOGIA:
-                valor = custoBase * (100 - planoSaude.getDescontoNeurologia());
+                valor = custoBase * (1 -(planoSaude.getDescontoNeurologia()*0.01));
                 break;
 
             case GINECOLOGIA:
-                valor = custoBase * (100 - planoSaude.getDescontoGinecologia());
+                valor = custoBase * (1 -(planoSaude.getDescontoGinecologia()*0.01));
                 break;
 
             case PSIQUIATRIA:
-                valor = custoBase * (100 - planoSaude.getDescontoPsiquiatria());
+                valor = custoBase * (1 -(planoSaude.getDescontoPsiquiatria()*0.01));
                 break;
 
             case OFTALMOLOGIA:
-                valor = custoBase * (100 - planoSaude.getDescontoOftalmologia());
+                valor = custoBase * (1 -(planoSaude.getDescontoOftalmologia()*0.01));
                 break;
         }
 
         if (getIdade() >= 60) {
-            valor *= (100- getPlanoSaude().getDescontoIdoso());
+            valor *= (1 - (planoSaude.getDescontoIdoso()*0.01));
+            return valor;
         }
         else {
             valor = valor;
-        }
-
-
             return valor;
+        }
     }
 
     /* METODO CADASTRAR PACIENTE PLANO */
-    public void cadastrarPacientePlano(Scanner scanner) throws IOException {
+    public void cadastrarPacientePlano(Scanner scanner) throws IOException, InterruptedException {
+
+
         PacientePlano pacientePlano = new PacientePlano();
 
         System.out.print("Nome do paciente: ");
@@ -133,6 +134,11 @@ public class PacientePlano extends Paciente {
                     String.join("|", pacientePlano.getHistInternacoes()));
 
         }
+        System.out.println();
+        Thread.sleep(1000);
+        System.out.println("Paciente com Plano Cadastrado com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
 
     }
 

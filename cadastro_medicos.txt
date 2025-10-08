@@ -1,1 +1,1 @@
-4;4;4.0;CARDIOLOGIA;Consulta: Paciente 4 - em 2025-12-12T22:20|Internação: Paciente 4 - 2 - em 2025-12-12|Consulta concluída: Paciente 4 - Arritmia | Prescrição: Calmante|Paciente: 4 -- Internação iniciada em: 2025-12-12 -- Internação encerrada em: 2025-10-07
+Maria;43;1000.0;PSIQUIATRIA;Consulta: Paciente Jorge - em 2025-10-10T10:10|Consulta: Paciente jorges - em 2026-11-11T22:22

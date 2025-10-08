@@ -108,7 +108,7 @@ public class Internacao{
 
 
     /* METODO MARCAR INTERNACAO */
-    public void marcarInternacao(Scanner scanner) throws IOException {
+    public void marcarInternacao(Scanner scanner) throws IOException, InterruptedException {
 
         System.out.print("Nome do Paciente: ");
         String nomeP = scanner.nextLine();
@@ -183,6 +183,12 @@ public class Internacao{
                     internacao.getQuarto() + ";" +
                     internacao.getCusto());
         }
+
+        System.out.println();
+        Thread.sleep(1000);
+        System.out.println("Internação marcada com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
     }
 
 
@@ -250,9 +256,13 @@ public class Internacao{
 
 
     /* METODO CANCELAR INTERNACAO */
-    public void cancelarInternacao(Scanner scanner, ArrayList<Internacao> internacoes) throws IOException {
+    public void cancelarInternacao(Scanner scanner, ArrayList<Internacao> internacoes) throws IOException, InterruptedException {
         if (internacoes.isEmpty()) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Não há internações cadastradas!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -279,7 +289,11 @@ public class Internacao{
         }
 
         if (internacaoSelecionada == null) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Internação não encontrada!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -297,6 +311,11 @@ public class Internacao{
         //Atualizar arquivo de internações
         Internacao.atualizarArquivoInternacoes(internacoes);
 
+
+        System.out.println();
+        Thread.sleep(1000);
         System.out.println("Internação cancelada/encerrada com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
     }
 }

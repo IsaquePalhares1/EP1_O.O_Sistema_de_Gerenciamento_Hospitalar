@@ -60,7 +60,7 @@ public class Consulta {
     }
 
     /* METODO AGENDAR CONSULTA */
-    public void agendarConsulta(Scanner scanner) throws IOException {
+    public void agendarConsulta(Scanner scanner) throws IOException, InterruptedException {
         System.out.print("Nome do Paciente: ");
         String nomeP = scanner.nextLine();
 
@@ -73,7 +73,7 @@ public class Consulta {
         System.out.print("Crm do Médico: ");
         String crm = scanner.nextLine();
 
-        System.out.print("Local da consulta: ");
+        System.out.print("Local da consulta (formato: 'Consultório x'): ");
         String local = scanner.nextLine();
 
         System.out.print("Data e hora (formato: AAAA-MM-DDTHH:MM): ");
@@ -92,7 +92,11 @@ public class Consulta {
             }
         }
         if (pacienteEncontrado == null) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Paciente não encontrado!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -106,7 +110,11 @@ public class Consulta {
             }
         }
         if (medicoEncontrado == null) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Médico não encontrado!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -121,7 +129,13 @@ public class Consulta {
                     consulta.getStatus());
         }
 
+        System.out.println();
+        Thread.sleep(1000);
         System.out.println("Consulta agendada com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
+
+
 
         /* ADICAO EM MEDICO E PACIENTE */
         String descricaoP = "Consulta do paciente com o Dr/Dra. " + medicoEncontrado.getNome() +
@@ -133,6 +147,7 @@ public class Consulta {
                 dataHora;
         medicoEncontrado.addConsultaMedico(descricaoM);
         medicoEncontrado.atualizarMedicoArquivo(medicoEncontrado);
+
     }
 
 
@@ -199,9 +214,13 @@ public class Consulta {
 
 
     /* METODO CONCLUIR CONSULTA */
-    public void concluirConsulta(Scanner scanner, ArrayList<Consulta> consultas) throws IOException {
+    public void concluirConsulta(Scanner scanner, ArrayList<Consulta> consultas) throws IOException, InterruptedException {
         if (consultas.isEmpty()) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Não há consultas cadastradas!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -228,7 +247,11 @@ public class Consulta {
         }
 
         if (consultaSelecionada == null) {
+            System.out.println();
+            Thread.sleep(1000);
             System.out.println("Consulta não encontrada!");
+            System.out.println();
+            Thread.sleep(2000);
             return;
         }
 
@@ -252,6 +275,10 @@ public class Consulta {
         consultaSelecionada.setStatus("CONCLUIDA");
         new Consulta().atualizarArquivoConsultas(consultas);
 
+        System.out.println();
+        Thread.sleep(1000);
         System.out.println("Consulta concluída com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
     }
 }

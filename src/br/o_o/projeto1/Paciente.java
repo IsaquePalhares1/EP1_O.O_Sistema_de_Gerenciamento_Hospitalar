@@ -105,7 +105,7 @@ public class Paciente {
     }
 
     /* METODO CADASTRAR PACIENTE */
-    public void cadastrarPaciente(Scanner scanner) throws IOException{
+    public void cadastrarPaciente(Scanner scanner) throws IOException, InterruptedException {
         Paciente paciente = new Paciente();
 
         System.out.print("Nome do paciente: ");
@@ -132,6 +132,11 @@ public class Paciente {
 
         }
 
+        System.out.println();
+        Thread.sleep(1000);
+        System.out.println("Paciente Cadastrado com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
 
     }
 
@@ -178,7 +183,6 @@ public class Paciente {
 
         for (Paciente p : pacientes) {
             if (p.getCpf().equals(paciente.getCpf())) {
-
                 linhas.add(paciente.getNome() + ";" +
                         paciente.getCpf() + ";" +
                         paciente.getIdade() + ";" +

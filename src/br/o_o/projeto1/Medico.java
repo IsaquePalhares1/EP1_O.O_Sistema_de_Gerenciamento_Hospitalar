@@ -100,7 +100,7 @@ public class Medico{
     }
 
     /* METODO CADASTRAR MEDICO */
-    public void cadastrarMedico(Scanner scanner) throws IOException {
+    public void cadastrarMedico(Scanner scanner) throws IOException, InterruptedException {
         Medico medico = new Medico();
 
         System.out.print("Nome do médico: ");
@@ -132,6 +132,12 @@ public class Medico{
 
 
         }
+
+        System.out.println();
+        Thread.sleep(1000);
+        System.out.println("Médico Cadastrado com sucesso!");
+        System.out.println();
+        Thread.sleep(2000);
 
     }
 

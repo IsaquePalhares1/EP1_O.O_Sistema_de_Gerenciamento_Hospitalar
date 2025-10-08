@@ -8,10 +8,11 @@ public class Main {
 
     public static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         /* BOAS VINDAS */
         System.out.println("Bem-Vindo ao Menu de Gerenciamento Hospitalar\n");
+        Thread.sleep(2000);
 
 
         /* MENU INICIAL */
@@ -28,18 +29,27 @@ public class Main {
                         "5 - Internar Paciente\n" +
                         "6 - Adicionar Plano de Saúde\n" +
                         "7 - Olhar Relatórios\n" +
-                        "8 - Registrar Diagnóstico e Prescrição de Consulta\n" +
+                        "8 - Concluir Consulta\n" +
                         "9 - Cancelar Internação\n" +
                         "10 - Sair\n");
+                System.out.println("****************************");
                 System.out.print("Escolha uma das opções: ");
-
                 opcao = scanner.nextInt();
                 scanner.nextLine();
+                System.out.println("****************************");
+                System.out.println();
+
+
 
             } while (opcao < 1 || opcao > 10);
 
             switch (opcao) {
                 case 1:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Cadastrar Paciente");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Paciente paciente = new Paciente();
                     paciente.cadastrarPaciente(scanner);
@@ -47,6 +57,11 @@ public class Main {
 
 
                 case 2:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Cadastrar Paciente com Plano de Saúde");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     PacientePlano pacientePlano = new PacientePlano();
                     pacientePlano.cadastrarPacientePlano(scanner);
@@ -54,6 +69,11 @@ public class Main {
 
 
                 case 3:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Cadastrar Médico");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Medico medico = new Medico();
                     medico.cadastrarMedico(scanner);
@@ -61,6 +81,11 @@ public class Main {
 
 
                 case 4:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Agendar Consulta");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Consulta consulta = new Consulta();
                     consulta.agendarConsulta(scanner);
@@ -68,6 +93,11 @@ public class Main {
 
 
                 case 5:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Internar Paciente");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Internacao internacao = new Internacao();
                     internacao.marcarInternacao(scanner);
@@ -75,6 +105,11 @@ public class Main {
 
 
                 case 6:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Adicionar Plano de Saúde");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     PlanoSaude planoSaude = new PlanoSaude();
                     planoSaude.cadastrarPlano(scanner);
@@ -82,12 +117,22 @@ public class Main {
 
 
                 case 7:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Olhar Relatórios");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     //...
                     break;
 
 
                 case 8:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Concluir Consulta");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Consulta consulta1 = new Consulta();
                     ArrayList<Consulta> consultas = consulta1.agendaDeConsultas();
@@ -96,6 +141,11 @@ public class Main {
 
 
                 case 9:
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Encerrar Internação");
+                    System.out.println("=============================");
+                    Thread.sleep(2000);
                     System.out.println();
                     Internacao internacao1 = new Internacao();
                     ArrayList<Internacao> internacoes = internacao1.historicoDeInternacoes();
@@ -103,8 +153,10 @@ public class Main {
                     break;
 
                 case 10:
-                    System.out.println();
-                    //...
+                    Thread.sleep(1000);
+                    System.out.println("=============================");
+                    System.out.println("Saindo ...");
+                    System.out.println("=============================");
                     isRunning = false;
                     break;
 
